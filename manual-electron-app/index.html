@@ -14,29 +14,28 @@
         #app-view { display: none; flex-direction: column; height: 100vh; }
         .controls { padding: 15px; background: #252526; border-bottom: 1px solid #444; flex-shrink: 0; display: flex; align-items: center; flex-wrap: wrap; }
         .video-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; }
-        video { width: 100%; height: 100%; object-fit: contain; cursor: crosshair; outline: none; }
+        /* --- FIX: Removed 'cursor: crosshair' to show the default system cursor --- */
+        video { width: 100%; height: 100%; object-fit: contain; outline: none; }
         #local-id-display { background: #444; padding: 8px; border-radius: 5px; user-select: all; font-weight: bold; }
         #remote-id-input { width: 300px; margin: 0 10px; padding: 8px; }
         #generate-key-btn { width: auto; font-size: 12px; padding: 8px 12px; margin-left: auto; background-color: #4C4C4C; }
         #access-key-display { font-size: 14px; font-weight: bold; color: #4dff91; margin-left: 10px; background: #222; padding: 8px; border-radius: 5px; letter-spacing: 2px; }
         #key-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-box { background: #252526; padding: 25px; border-radius: 8px; width: 350px; text-align: center; border: 1px solid #444; }
-        .modal-box h3 { margin-top: 0; }
-        .modal-box p { font-size: 14px; color: #ccc; }
         .modal-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
-        .modal-buttons button { width: 48%; }
         #key-cancel-btn { background: #6c757d; }
-
-        /* --- NEW: Styles for the disconnect button --- */
-        #disconnect-btn { 
-            display: none; /* Hidden by default */
-            width: auto; 
-            font-size: 14px; 
-            padding: 8px 16px; 
-            margin-left: 10px; 
-            background-color: #dc3545; /* Red color for disconnect */
-            border-color: #dc3545;
+        #disconnect-btn { display: none; width: auto; font-size: 14px; padding: 8px 16px; margin-left: 10px; background-color: #dc3545; border-color: #dc3545; }
+        /* --- NEW: Styles for the fullscreen button --- */
+        #fullscreen-btn {
+            display: none; /* Hidden until a session starts */
+            width: auto;
+            padding: 8px;
+            margin-left: 10px;
+            background-color: #4C4C4C;
+            border-color: #555;
+            line-height: 0; /* Helps center the SVG icon */
         }
+        #fullscreen-btn svg { width: 16px; height: 16px; fill: white; }
     </style>
 </head>
 <body>
@@ -54,8 +53,11 @@
             <span>Logged in as: </span><span id="local-id-display">...</span>
             <input type="text" id="remote-id-input" placeholder="Enter remote user's email" />
             <button id="connect-btn">Connect</button>
-            <!-- --- NEW: The disconnect button --- -->
             <button id="disconnect-btn">Disconnect</button>
+            <!-- --- NEW: The fullscreen button with an inline SVG icon --- -->
+            <button id="fullscreen-btn">
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+            </button>
             <button id="generate-key-btn">Generate Access Key</button>
             <span id="access-key-display"></span>
         </div>

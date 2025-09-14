@@ -1,22 +1,35 @@
 {
   "name": "manual-electron-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application built manually.",
+  "description": "A secure, open-source remote desktop application.",
   "main": "main.js",
-
-"scripts": {
-  "start": "npm run rebuild && electron .",
-  "rebuild": "electron-rebuild"
-},
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Dibya",
+    "email": "your_email@example.com"
+  },
   "license": "MIT",
   "devDependencies": {
-    "electron": "^31.0.1",
-    "electron-rebuild": "^3.2.9"
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "electron": "31.0.1",
+    "electron-rebuild": "^3.6.0"
   },
   "dependencies": {
     "robotjs": "^0.6.0",
-    "socket.io-client": "^4.8.1"
+    "socket.io-client": "^4.7.5"
   }
 }
+
+
