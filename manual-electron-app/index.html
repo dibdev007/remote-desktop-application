@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"><title>Open Remote Desktop</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #2e2e2e; color: white; margin: 0; }
+        .view { width: 100vw; height: 100vh; }
+        input, button { padding: 12px; font-size: 16px; margin: 8px 0; border-radius: 5px; border: 1px solid #555; background: #333; color: white; width: 100%; box-sizing: border-box; }
+        button { cursor: pointer; background: #007acc; border-color: #007acc; font-weight: bold; }
+        button:hover { background: #005fa3; }
+        #login-view { display: flex; align-items: center; justify-content: center; }
+        .login-box { width: 320px; padding: 20px; background: #252526; border-radius: 8px; }
+        #login-error { color: #ff4d4d; text-align: center; display: none; margin-top: 10px; }
+        #app-view { display: none; flex-direction: column; height: 100vh; }
+        .controls { padding: 15px; background: #252526; border-bottom: 1px solid #444; flex-shrink: 0; display: flex; align-items: center; flex-wrap: wrap; }
+        .video-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; }
+        video { width: 100%; height: 100%; object-fit: contain; cursor: crosshair; outline: none; }
+        #local-id-display { background: #444; padding: 8px; border-radius: 5px; user-select: all; font-weight: bold; }
+        #remote-id-input { width: 300px; margin: 0 10px; padding: 8px; }
+        #generate-key-btn { width: auto; font-size: 12px; padding: 8px 12px; margin-left: auto; background-color: #4C4C4C; }
+        #access-key-display { font-size: 14px; font-weight: bold; color: #4dff91; margin-left: 10px; background: #222; padding: 8px; border-radius: 5px; letter-spacing: 2px; }
+        #key-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-box { background: #252526; padding: 25px; border-radius: 8px; width: 350px; text-align: center; border: 1px solid #444; }
+        .modal-box h3 { margin-top: 0; }
+        .modal-box p { font-size: 14px; color: #ccc; }
+        .modal-buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+        .modal-buttons button { width: 48%; }
+        #key-cancel-btn { background: #6c757d; }
+
+        /* --- NEW: Styles for the disconnect button --- */
+        #disconnect-btn { 
+            display: none; /* Hidden by default */
+            width: auto; 
+            font-size: 14px; 
+            padding: 8px 16px; 
+            margin-left: 10px; 
+            background-color: #dc3545; /* Red color for disconnect */
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-view" class="view">
+        <div class="login-box">
+            <h2>Institutional Login</h2>
+            <input type="email" id="email-input" placeholder="your.name@institution.com" />
+            <input type="password" id="password-input" placeholder="Password" />
+            <button id="login-btn">Login</button>
+            <p id="login-error">Invalid credentials. Please try again.</p>
+        </div>
+    </div>
+    <div id="app-view" class="view">
+        <div class="controls">
+            <span>Logged in as: </span><span id="local-id-display">...</span>
+            <input type="text" id="remote-id-input" placeholder="Enter remote user's email" />
+            <button id="connect-btn">Connect</button>
+            <!-- --- NEW: The disconnect button --- -->
+            <button id="disconnect-btn">Disconnect</button>
+            <button id="generate-key-btn">Generate Access Key</button>
+            <span id="access-key-display"></span>
+        </div>
+        <div class="video-container">
+            <video id="remote-video" autoplay tabindex="0"></video>
+        </div>
+    </div>
+    <div id="key-modal-overlay">
+        <div class="modal-box">
+            <h3>Cross-Domain Connection</h3>
+            <p>An access key is required to connect to this user. Please enter the key provided by them.</p>
+            <input type="text" id="key-input" placeholder="Enter 6-digit key" />
+            <div class="modal-buttons">
+                <button id="key-cancel-btn">Cancel</button>
+                <button id="key-submit-btn">Connect</button>
+            </div>
+        </div>
+    </div>
+    <script src="./renderer.js"></script>
+</body>
+</html>
+

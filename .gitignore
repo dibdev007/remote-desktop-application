@@ -1,0 +1,5 @@
+# Ignore all node_modules folders in the project
+node_modules/
+
+# Ignore build artifacts and installers
+out/

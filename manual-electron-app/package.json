@@ -1,0 +1,22 @@
+{
+  "name": "manual-electron-app",
+  "version": "1.0.0",
+  "description": "A minimal Electron application built manually.",
+  "main": "main.js",
+
+"scripts": {
+  "start": "npm run rebuild && electron .",
+  "rebuild": "electron-rebuild"
+},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.1",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "robotjs": "^0.6.0",
+    "socket.io-client": "^4.8.1"
+  }
+}
